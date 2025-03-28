@@ -100,3 +100,52 @@ html`<div style="   color : red;
 ${ foo}:${bar};
             display    :inline ">
   </div>`
+
+const staticTagName = 'static-tag-name';
+
+html`
+  <div>
+    <${staticTagName}
+    
+    x-attr="${replace}" .prop="${replace}">
+    </${staticTagName}>
+    <${this.staticTagName}
+    >
+    <${this.a.staticTagName}></${this.a.staticTagName}>
+    </${this.staticTagName}
+    >
+</div>
+`
+
+// Should not format
+html`    
+<${getTags().dom.p}>
+    </${getTags().dom.p}>
+`
+html`<${literal(staticTagName)}></
+    ${literal(staticTagName)}>
+`
+html`
+  <${a().c}>
+</${b().c}>
+`
+html`
+  <${a[x]}>
+</${a[x]}>
+`
+html`
+  <${a?.x}>
+</${a?.x}>
+`
+html`
+  <${a.x /* comment */}>
+</${a.x}>
+`
+html`
+  <${a.x }>
+</${a.x/* comment */}>
+`
+html`
+  <${a.x}>
+</${a[x]}>
+`
